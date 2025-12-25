@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aflah Calculator</title>
+<style>
+  body {
+    background-color: #000000;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .calculator {
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 70px);
+    grid-template-rows: 80px repeat(5, 60px);
+    gap: 10px;
+  }
+
+  input {
+    grid-column: 1 / 5;
+    font-size: 24px;
+    text-align: right;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: white;
+  }
+
+  button {
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .num {
+    background-color: #424242;
+    color: white;
+  }
+
+  .operator {
+    background-color: grey;
+    color: black;
+  }
+
+  .equals {
+    background-color: orange;
+    color: black;
+  }
+
+  .clear {
+    background-color: red;
+    color: white;
+    grid-column: span 2;
+  }
+
+  .backspace {
+    background-color: #555555;
+    color: white;
+  }
+
+  .percent {
+    background-color: #424242;
+    color: white;
+  }
+</style>
+</head>
+<body>
+<div class="calculator">
+  <input type="text" id="display" disabled>
+
+  <button class="num" onclick="press('7')">7</button>
+  <button class="num" onclick="press('8')">8</button>
+  <button class="num" onclick="press('9')">9</button>
+  <button class="operator" onclick="press('+')">+</button>
+
+  <button class="num" onclick="press('4')">4</button>
+  <button class="num" onclick="press('5')">5</button>
+  <button class="num" onclick="press('6')">6</button>
+  <button class="operator" onclick="press('-')">-</button>
+
+  <button class="num" onclick="press('1')">1</button>
+  <button class="num" onclick="press('2')">2</button>
+  <button class="num" onclick="press('3')">3</button>
+  <button class="operator" onclick="press('*')">×</button>
+
+  <button class="num" onclick="press('0')">0</button>
+  <button class="num" onclick="press('.')">.</button>
+  <button class="percent" onclick="press('%')">%</button>
+  <button class="operator" onclick="press('/')">÷</button>
+
+  <button class="clear" onclick="clearDisplay()">CLEAR</button>
+  <button class="backspace" onclick="backspace()">⌫</button>
+  <button class="equals" onclick="calculate()">=</button>
+</div>
+
+<script>
+function press(val) {
+  const display = document.getElementById('display');
+  if (val === '%') {
+    display.value += '/100';
+  } else if (val === '*') {
+    display.value += '*';
+  } else if (val === '/') {
+    display.value += '/';
+  } else {
+    display.value += val;
+  }
+}
+
+function clearDisplay() {
+  document.getElementById('display').value = '';
+}
+
+function backspace() {
+  const display = document.getElementById('display');
+  display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+  const display = document.getElementById('display');
+  try {
+    display.value = eval(display.value);
+  } catch {
+    display.value = 'Error';
+  }
+}
+</script>
+</body>
+</html>
